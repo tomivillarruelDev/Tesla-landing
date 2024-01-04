@@ -11,9 +11,7 @@ import Logo from "./Logo.astro";
     </div>
 
     <nav class="hidden lg:flex">
-        <!-- Tu lista de enlaces principal -->
         <ul class="flex text-sm [&>li>a]:transition-colors [&>li>a]:duration-500 [&>li>a]:text-current [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2 menu-link">
-            <!-- ... Tus elementos li y a aquí ... -->
             <li><a href="#model-s">Model S</a></li>
             <li><a href="#model-3">Model 3</a></li>
             <li><a href="#model-x">Model X</a></li>
@@ -23,10 +21,9 @@ import Logo from "./Logo.astro";
         </ul>
     </nav>
 
-    <!-- Ícono de hamburguesa -->
     <div class="lg:hidden">
         <button id="menu-toggle" class="focus:outline-none flex">
-            <span class="text-sm text-current  font-medium inline-block rounded px-4 py-2 bg-black/5 backdrop-blur-sm ">Menu</span>
+            <span class="text-sm text-current transition-colors duration-500 font-medium inline-block rounded px-4 py-2 bg-black/5 backdrop-blur-sm ">Menu</span>
         </button>
     </div>
 
@@ -76,7 +73,7 @@ import Logo from "./Logo.astro";
 
 
 <script>
-    // JavaScript para mostrar/ocultar el menú desplegable en dispositivos móviles
+    //mostrar/ocultar el menú desplegable en dispositivos móviles
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     const closeMenuBtn = document.getElementById('close-menu');
