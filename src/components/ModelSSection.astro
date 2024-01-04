@@ -1,0 +1,35 @@
+---
+import Section from "./Section.astro";
+
+---
+
+<Section
+    id='model-s'
+    title='Model S' 
+    subtitle='Después de Est. Ahorro de gasolina' 
+    color='black'>
+    <img
+        slot="background"
+        class="h-full w-full object-cover object-center " 
+        src="/model-s.avif"
+        alt="Model S"
+    >
+    
+    
+        <div 
+            class="flex gap-x-6 mx-auto"
+            slot="footerButton">
+            <a 
+                class="border-[3px] border-white bg-white text-sm rounded font-medium text-black px-12 py-2 transition-colors hover:bg-black
+                hover:text-white hover:border-black  inline-flex justify-center items-center" 
+                href="#">
+                Explorar inventario
+            </a>
+            <a 
+                class="bg-black/50 backdrop-blur-sm text-sm rounded font-medium text-white px-12 py-2 inline-block hover:bg-black/30 transition-colors " 
+                href="#">
+                Pedido personalizado  
+            </a>
+        </div>
+
+</Section>

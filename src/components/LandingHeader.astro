@@ -1,0 +1,146 @@
+---
+import Logo from "./Logo.astro";
+
+---
+<header 
+    id="landing-header"
+    class="py-3 px-10 flex items-center fixed top-0 w-full justify-between z-40"
+>
+    <div class="flex flex-grow basis-0">
+        <Logo />
+    </div>
+
+    <nav class="hidden lg:flex">
+        <!-- Tu lista de enlaces principal -->
+        <ul class="flex text-sm [&>li>a]:transition-colors [&>li>a]:duration-500 [&>li>a]:text-current [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2 .menu-link">
+            <!-- ... Tus elementos li y a aquí ... -->
+            <li><a href="#model-s">Model S</a></li>
+            <li><a href="#model-3">Model 3</a></li>
+            <li><a href="#model-x">Model X</a></li>
+            <li><a href="#model-y">Model Y</a></li>
+            <li><a href="#powerwall">Powerwall</a></li>
+            <li><a href="#accessories">Carga</a></li>
+        </ul>
+    </nav>
+
+    <!-- Ícono de hamburguesa -->
+    <div class="lg:hidden">
+        <button id="menu-toggle" class="focus:outline-none flex">
+            <span class="text-sm text-current  font-medium inline-block rounded px-4 py-2 bg-black/5 backdrop-blur-sm ">Menu</span>
+        </button>
+    </div>
+
+    <nav class="hidden lg:flex flex-grow justify-end basis-0">
+        <ul class="flex text-sm [&>li>a]:transition-colors [&>li>a]:duration-500 [&>li>a]:text-current  [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2">
+            <li><a href="#">Soporte</a></li>
+            <li><a href="#">Tienda</a></li>
+            <li><a href="#">Cuenta</a></li>
+        </ul>
+    </nav>
+
+
+    <div id="mobile-menu" class="lg:hidden hidden fixed inset-0 bg-white z-50">
+        <div class="flex flex-col h-screen m-10">
+            <div class="flex justify-end">
+                <button id="close-menu" class="focus:outline-none text-xl py-3 px-5 text-black bg-black/5 rounded backdrop-blur-sm">
+                    X
+                </button>
+            </div>
+    
+            <ul class="flex flex-col gap-y-10 pt-8 text-1xl [&>li>a]:font-medium [&>li>a]:py-2 [&>li>a]:text-black">
+                <li><a href="#model-s" data-target="close-menu">Model S</a></li>
+                <li><a href="#model-3" data-target="close-menu">Model 3</a></li>
+                <li><a href="#model-x" data-target="close-menu">Model X</a></li>
+                <li><a href="#model-y" data-target="close-menu">Model Y</a></li>
+                <li><a href="#powerwall" data-target="close-menu">Powerwall</a></li>
+                <li><a href="#accessories" data-target="close-menu">Carga</a></li>
+            </ul>
+        
+        </div>
+    </div>
+
+    <div
+        id="menu-backdrop"
+        class={`
+        absolute bg-black/5 backdrop-blur-lg rounded 
+        translate-x-[var(--left)] translate-y-[var(--top)]
+        left-0 top-0
+        w-[var(--width)] h-[var(--height)] 
+        transition-all duration-500
+        ease-out opacity-0 -z-10
+        `}  
+    >
+
+    </div>
+</header>
+
+
+<script>
+    // JavaScript para mostrar/ocultar el menú desplegable en dispositivos móviles
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeMenuBtn = document.getElementById('close-menu');
+
+    menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    closeMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+    });
+
+    const navLinks = document.querySelectorAll('#mobile-menu a');
+
+    navLinks.forEach((link) => {
+        link.addEventListener('click', (event: MouseEvent) => {
+            const target = (event.target as HTMLElement).dataset.target;
+            if (target === 'close-menu') {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    });
+
+    const $listItems = document.querySelectorAll('#landing-header li') 
+    const $menuBackdrop = document.querySelector('#menu-backdrop') as HTMLElement
+
+    $listItems.forEach( item => {
+        item.addEventListener('mouseenter', () => {
+            const { left, top, width, height } = item.getBoundingClientRect()
+            $menuBackdrop.style.setProperty('--left', `${left}px`)
+            $menuBackdrop.style.setProperty('--top', `${top}px`)
+            $menuBackdrop.style.setProperty('--width', `${width}px`)
+            $menuBackdrop.style.setProperty('--height', `${height}px`)
+            $menuBackdrop.style.opacity = '1'
+            $menuBackdrop.style.visibility = 'visible'
+        })
+
+        item.addEventListener('mouseleave', () => {
+            $menuBackdrop.style.opacity = '0'
+            $menuBackdrop.style.visibility = 'hidden'
+        })
+    })
+</script>
+
+<script>
+    const $header = document.querySelector('#landing-header') as HTMLElement
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.90
+    }
+
+    const observe = new IntersectionObserver( entries => {
+        entries.forEach( entry => {
+            const { isIntersecting } = entry
+            if ( isIntersecting ) {
+                const color = entry.target.getAttribute('data-header-color')
+                $header.style.color = color
+            }
+        })
+    }, observerOptions)
+
+    const $sections = document.querySelectorAll('.landing-section')
+    $sections.forEach( section => observe.observe(section) )
+</script>
+
+

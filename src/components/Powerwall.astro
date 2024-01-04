@@ -1,0 +1,31 @@
+---
+import Section from "./Section.astro";
+
+---
+
+<Section
+    id='powerwall'
+    title='Powerwall' 
+    subtitle='' 
+    color='black'>
+    <img 
+        slot="background"
+        class="object-center object-cover h-full w-full" 
+        src="/powerwall.avif"
+    >
+    <div 
+        class="flex gap-x-6 mx-auto"
+        slot="footerButton">
+        <a 
+            class="border-[3px] border-white bg-white text-sm rounded font-medium text-black px-12 py-2 transition-colors hover:bg-black
+            hover:text-white hover:border-black  inline-flex justify-center items-center" 
+            href="#">
+            Ordenar ahora
+        </a>
+        <a 
+            class="bg-black/50 backdrop-blur-sm text-sm rounded font-medium text-white px-12 py-2 inline-block hover:bg-black/30 transition-colors " 
+            href="#">
+            Descubrir más
+        </a>
+    </div>
+</Section>
